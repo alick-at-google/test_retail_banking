@@ -1,4 +1,4 @@
-connection: "looker-private-demo"
+connection: "retail_banking"
 
 include: "/banking_and_card_views/*.view.lkml"
 include: "/geo_views/*.view.lkml"
