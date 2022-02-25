@@ -64,6 +64,7 @@ view: account {
       icon_url: "http://www.looker.com/favicon.ico"
     }
     required_fields: [client.first_name]
+    # tags: ["google-ads-uid"]
   }
 
   dimension_group: create {

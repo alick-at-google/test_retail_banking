@@ -12,18 +12,21 @@ view: client {
       url: "/dashboards/goGpXFSyjbvdcrPMNAalS8?Client%20ID={{ value | encode_uri }}"
       icon_url: "http://www.looker.com/favicon.ico"
     }
+    tags: ["google-ads-uid"]
   }
 
   dimension: first_name {
     hidden: yes
     type: string
     sql: ${TABLE}.first_name ;;
+    tags: ["google-ads-first"]
   }
 
   dimension:last_name {
     hidden: yes
     type: string
     sql: ${TABLE}.last_name ;;
+    tags: ["google-ads-last"]
   }
 
   dimension: name {
@@ -97,6 +100,7 @@ view: client {
     group_label: "Address"
     type: string
     sql: ${TABLE}.street ;;
+    tags: ["google-ads-street"]
   }
 
   dimension: city {
@@ -104,6 +108,7 @@ view: client {
     group_label: "Address"
     type: string
     sql: SPLIT(${TABLE}.address,'|')[OFFSET(0)] ;;
+    tags: ["google-ads-city"]
   }
 
   dimension: state {
@@ -112,6 +117,7 @@ view: client {
     group_label: "Address"
     type: string
     sql: SPLIT(${TABLE}.address,'|')[OFFSET(1)] ;;
+    tags: ["google-ads-state"]
   }
 
   dimension: zip {
@@ -121,7 +127,15 @@ view: client {
     sql: SPLIT(${TABLE}.address,'|')[OFFSET(2)] ;;
     }
 
-    dimension: client_full_address {
+  dimension: zip_copy {
+    label: "postal"
+    group_label: "Address"
+    type: zipcode
+    sql: SPLIT(${TABLE}.address,'|')[OFFSET(2)] ;;
+    tags: ["google-ads-postal","google-ads-duplicate"]
+  }
+
+  dimension: client_full_address {
       type: string
       group_label: "Address"
       sql: concat(${street},", ",${city},", ", ${state}," ",${zip});;
