@@ -22,6 +22,7 @@ datagroup: retail_banking_etl {
 
 explore: account {
   label: "(1) Accounts, Loans and Cards"
+  description: "#audience-builder"
   join: district {
     relationship: many_to_one
     sql_on: ${account.district_id} = ${district.district_id} ;;
@@ -69,6 +70,7 @@ explore: account {
 explore: trans {
   fields: [ALL_FIELDS*, -client.has_loan, -client.number_of_clients_with_loans, -client.percent_clients_with_loans]
   label: "(3) Account Transactions"
+  description: "#audience-builder"
   join: account {
     relationship: many_to_one
     sql_on: ${trans.account_id} = ${account.account_id} ;;
@@ -93,6 +95,7 @@ explore: trans {
 
 explore: card_payments {
   label: "(5) Card Payments"
+  description: "#audience-builder"
   fields: [ALL_FIELDS*, -card.days_between_account_signup, -client.has_loan, -client.number_of_clients_with_loans, -client.percent_clients_with_loans]
   join: card_payment_dates {
     relationship: many_to_one
